@@ -9,18 +9,20 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import org.testng.annotations.Parameters;
+
 import BaseClass.BaseClass;
 import Common.Common;
 
-public class Test extends BaseClass {
+public class Test_01 extends BaseClass {
 	public Common c = new Common();
-	
 
+	@Test
 	public void buyTicket() {
 		try {
 			// ida y vuelta
 			driver.findElement(By.className("sbox5-3-radio -md bundle-checked")).click();
-			
+
 			c.from.sendKeys(getOrigin());
 			driver.findElement(By.xpath("(//li[@class='item -active'])[1]"));
 
