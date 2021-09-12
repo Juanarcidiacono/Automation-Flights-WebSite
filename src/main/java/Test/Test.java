@@ -10,40 +10,35 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import BaseClass.BaseClass;
+import Common.Common;
 
 public class Test extends BaseClass {
-
-	private WebDriverWait wait = new WebDriverWait(driver, 20);
-	private WebElement from = driver
-			.findElement(By.xpath("(//input[@placeholder='Ingresa desde dónde viajas'])[last()]"));
-	private WebElement to = driver
-			.findElement(By.xpath("(//input[@placeholder='Ingresa hacia dónde viajas'])[last()]"));
-
-	public void enterWebSite() {
-		String actualTitle = driver.getTitle();
-
-		driver.get(getURL());
-
-		try {
-			wait.until(ExpectedConditions.elementToBeClickable(from));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		Assert.assertEquals(actualTitle, getExpectedTitle());
-	}
+	public Common c = new Common();
+	
 
 	public void buyTicket() {
 		try {
-			from.sendKeys(getOrigin());
-			to.sendKeys(getDestination());
+			// ida y vuelta
+			driver.findElement(By.className("sbox5-3-radio -md bundle-checked")).click();
 			
-			
+			c.from.sendKeys(getOrigin());
+			driver.findElement(By.xpath("(//li[@class='item -active'])[1]"));
+
+			c.to.sendKeys(getDestination());
+			driver.findElement(By.xpath("(//li[@class='item'])[1]"));
+
+			// sin fecha
+			driver.findElement(By.className("sbox5-3-label-span")).click();
+
+			// buscar
+			driver.findElement(By.xpath("//div[@class='sbox5-button-container--1X4O8']//button")).click();
+
+			// tercera opcion
+			driver.findElement(By.xpath("(//div[@class='cluster-container border not-overflow'])[3]")).click();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
 
 }
